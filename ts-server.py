@@ -22,7 +22,7 @@ def ts():
     TS_table = {}
 
     for line in fr:
-        #do something with dictionary
+        pass#do something with dictionary
  
     #determine local hostname, IP
     #address , select a port number
@@ -35,13 +35,13 @@ def ts():
     print("[S]: Attempting to connect to client.\n[S]: Server IP address is  ",localhost_ip)
     ctsd,addr=tssd.accept()
 
-    while true:
+    while True:
         hnstring=ctsd.recv(100)
         entry
         if hnstring in TS_table:
             entry= TS_table(hnstring)
         else:
-            entry= “hname” + “Error: Host not found”
+            entry= "hname" + "Error: Host not found"
         ctsd.send(pickle.dump(entry))
 
     # close everything
