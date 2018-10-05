@@ -22,14 +22,17 @@ def ts():
     TS_table = {}
 
     for line in fr:
-        tokenize = tokenizer(line)
-        key = next(tokenize)
-        TS_table[key] = [next(tokenize),next(tokenize)]
+        #do something with dictionary
  
     #determine local hostname, IP
     #address , select a port number
     server_binding=('',50008)
     tssd.bind(server_binding)
+    tssd.listen(1)
+    host=mysoc.gethostname()
+    print("[S]: Server host name is: ",host)
+    localhost_ip=(mysoc.gethostbyname(host))
+    print("[S]: Attempting to connect to client.\n[S]: Server IP address is  ",localhost_ip)
     ctsd,addr=tssd.accept()
 
     while true:
