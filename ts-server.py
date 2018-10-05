@@ -2,10 +2,6 @@
 import socket as mysoc
 import pickle
 
-def tokenizer(entry):
-    for token in entry.split():
-            yield token
-
 def ts():
     try:
         tssd = mysoc.socket(mysoc.AF_INET, mysoc.SOCK_STREAM)
