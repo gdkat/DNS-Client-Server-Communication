@@ -25,7 +25,7 @@ def rs():
     RS_table = {}
     #List of information for TS Server in format [TS Host Name, TS_IP, Flag]
     TS = []
-
+    # {hostname: {ip: x , flag: y}} 
     for line in fr:
         #Per entry, use split to create list of words
         #format = [Host Name, Host_IP, Flag]
