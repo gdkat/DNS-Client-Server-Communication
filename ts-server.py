@@ -37,11 +37,11 @@ def ts():
 
     while True:
         hnstring=ctsd.recv(100)
-        entry
+        entry = ''
         if hnstring in TS_table:
-            entry= TS_table(hnstring)
+            entry = TS_table[hnstring]
         else:
-            entry= "hname" + "Error: Host not found"
+            entry = "hname" + "Error: Host not found"
         ctsd.send(pickle.dump(entry))
 
     # close everything

@@ -24,8 +24,8 @@ def rs():
     #format dictionary[hostname]: [host_ip,Flag]
     RS_table = {}
     #List of information for TS Server in format [TS Host Name, TS_IP, Flag]
-    TS = []
-    # {hostname: {ip: x , flag: y}} 
+    TS = {}
+    # {hostname: {ip: x , flag: y}}
     for line in fr:
         #Per entry, use split to create list of words
         #format = [Host Name, Host_IP, Flag]
@@ -34,7 +34,9 @@ def rs():
         #gets rid of trailing/preceding spaces and '\n' for proper strcomparisons
         RS_table[tokenize[0].strip()] = [tokenize[1].strip(),tokenize[2].strip()]
         if 'NS' in (RS_table[tokenize[0]])[1]:
-            TS = [tokenize[0].strip(), (mysoc.gethostbyname(tokenize[0].strip())), (RS_table[tokenize[0].strip()])[1]]
+            name = tokenize[0].strip()
+            TS[name] = {'ip': mysoc.gethostbyname(tokenize[0].strip()), 'flag': RS_table[tokenize[0].strip()][1]}
+            #TS = [tokenize[0].strip(), (mysoc.gethostbyname(tokenize[0].strip())), (RS_table[tokenize[0].strip()])[1]]
     if not TS:
         print("Warning, no TS server to redirect miss\n")
     """ else:
@@ -42,7 +44,7 @@ def rs():
 
     #doing server binding stuff here
     #listen for and accept client connection
-    server_binding=('',50007)
+    server_binding = ('',50007)
     rssd.bind(server_binding)
     rssd.listen(1)
     host=mysoc.gethostname()
