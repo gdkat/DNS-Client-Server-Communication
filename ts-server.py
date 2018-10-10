@@ -20,10 +20,17 @@ def ts():
         exit()
 
     TS_table = {}
-
+    data = []
     for line in fr:
-        pass#do something with dictionary
- 
+        entry = line.split(' ')
+        toadd = []
+        for item in entry:
+            if item != ' ' and item != '':
+                if item.endswith('\n'):
+                    item = item[:-1]
+                toadd.append(item)
+        data.append(toadd)
+
     #determine local hostname, IP
     #address , select a port number
     server_binding=('',50008)
