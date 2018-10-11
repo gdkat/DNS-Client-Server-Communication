@@ -49,7 +49,8 @@ def ts():
         hnstring=ctsd.recv(100)
         entry = ''
         if hnstring in TS_table:
-            entry = TS_table[hnstring]
+            #entry = TS_table[hnstring]
+            entry = hnstring + ' ' + TS_table[hnstring]['ip'] + ' ' + TS_table[hnstring]['flag']
         else:
             entry = "hname" + "Error: Host not found"
         ctsd.send(pickle.dump(entry))
