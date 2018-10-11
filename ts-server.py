@@ -20,7 +20,6 @@ def ts():
         exit()
 
     TS_table = {}
-    data = []
     for line in fr:
         entry = line.split(' ')
         formatted_entry = []
@@ -34,8 +33,6 @@ def ts():
             TS_table[formatted_entry[0]] = {}
         TS_table[formatted_entry[0]]['ip'] = formatted_entry[1]
         TS_table[formatted_entry[0]]['flag'] = formatted_entry[2]
-                #toadd.append(item)
-        #data.append(toadd)
 
     #determine local hostname, IP
     #address , select a port number
