@@ -44,12 +44,15 @@ def client():
     #write all resolved IP information to RESOLVED.txt
     with open("RESOLVED.txt", "w") as fw:
         for hostname in fr:
+            print('h: ' + str(hostname))
             ctors.send(hostname.strip().encode('utf-8'))
             dataFromRS=ctors.recv(100)
             if not dataFromRS: break
             result=pickle.loads(dataFromRS)
-            if 'A' in result[1]:
-                fw.write(hostname.strip()+' '+result[0]+' '+result[1]+'\n')
+            print('r: ' + str(result))
+            #if 'A' in result[1]:
+            if list(result.values())[0]['flag'] == 'A':
+                fw.write(hostname.strip()+' '+list(result.values())[0]['ip']+' '+ list(result.values())[0]['flag']+'\n')
             """ else
                 #[connect to TS server]
                 if flag-field (dr) == ‘NS’
@@ -63,5 +66,5 @@ def client():
     fw.close()
     ctors.close()
     ctots.close()
-
+    exit()
 client()

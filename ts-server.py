@@ -52,9 +52,11 @@ def ts():
             #entry = TS_table[hnstring]
             entry = hnstring + ' ' + TS_table[hnstring]['ip'] + ' ' + TS_table[hnstring]['flag']
         else:
-            entry = "hname" + "Error: Host not found"
+            entry = "hname " + "Error: Host not found"
         ctsd.send(pickle.dump(entry))
 
     # close everything
     fr.close()
     tssd.close()
+
+ts()
