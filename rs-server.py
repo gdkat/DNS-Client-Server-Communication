@@ -32,7 +32,7 @@ def rs():
         tokenize = line.split()
         #Using strip a lot here
         #gets rid of trailing/preceding spaces and '\n' for proper strcomparisons
-        print('???: ' + str(tokenize[1].strip()))
+        # print('???: ' + str(tokenize[1].strip()))
         if tokenize[1].strip() == '-':
             pass
         # RS_table[tokenize[0].strip()] = [tokenize[1].strip(),tokenize[2].strip()]
