@@ -54,12 +54,12 @@ def client():
     #write all resolved IP information to RESOLVED.txt
     with open("RESOLVED.txt", "w") as fw:
         for hostname in fr:
-            print('h: ' + str(hostname))
+            # print('h: ' + str(hostname))
             ctors.send(hostname.strip().encode('utf-8'))
             dataFromRS=ctors.recv(100)
             if not dataFromRS: break
             result=pickle.loads(dataFromRS)
-            print('r: ' + str(result))
+            # print('r: ' + str(result))
             #if 'A' in result[1]:
             '''entry = result.split(' ')
             formatted_entry = []
