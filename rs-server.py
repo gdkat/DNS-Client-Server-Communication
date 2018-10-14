@@ -49,10 +49,11 @@ def rs():
 
     #doing server binding stuff here
     #listen for and accept client connection
-    server_binding = ('',50007)
+    server_binding = ('',50008)
     rssd.bind(server_binding)
     rssd.listen(1)
     host=mysoc.gethostname()
+    # host = 'grep.cs.rutgers.edu'
     print("[S]: Server host name is: ",host)
     localhost_ip=(mysoc.gethostbyname(host))
     print("[S]: Attempting to connect to client.\n[S]: Server IP address is  ",localhost_ip)
@@ -62,6 +63,7 @@ def rs():
     while True:
         #receive hostname string for resolution request
         data=crsd.recv(100)
+        # print('test')
         hnstring=data.decode('utf-8')
         if not hnstring: break
         #check if hnstring is in dictionary and return relevant info list if found

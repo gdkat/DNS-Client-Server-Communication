@@ -29,8 +29,9 @@ def client():
 
     #[determine hostname of RS server and port ]
     sa_sameas_myaddr = mysoc.gethostbyname(mysoc.gethostname())
+    # sa_sameas_myaddr = 'grep.cs.rutgers.edu'
     # Define the port on which you want to connect to the server
-    port = 50007
+    port = 50008
     #[bind ctors socket to RS address, RS port]
     try:
         server_binding=(sa_sameas_myaddr,port)
@@ -39,27 +40,50 @@ def client():
         print('{} \n'.format("connect error "), err)
         exit()
 
+    try:
+        sa_sameas_myaddr = 'grep.cs.rutgers.edu'
+        server_binding = (sa_sameas_myaddr, port)
+        ctots.connect(server_binding)
+    except mysoc.error as err:
+        print('{} \n'.format("connect error "), err)
+        exit()
+
+
     #check rs-server.py for information on how data
     #is being transferred and stored
     #write all resolved IP information to RESOLVED.txt
     with open("RESOLVED.txt", "w") as fw:
         for hostname in fr:
-            # print('h: ' + str(hostname))
+            print('h: ' + str(hostname))
             ctors.send(hostname.strip().encode('utf-8'))
             dataFromRS=ctors.recv(100)
             if not dataFromRS: break
             result=pickle.loads(dataFromRS)
-            # print('r: ' + str(result))
+            print('r: ' + str(result))
             #if 'A' in result[1]:
+            '''entry = result.split(' ')
+            formatted_entry = []
+            for item in entry:
+                if item != ' ' and item != '':
+                    if item.endswith('\n'):
+                        item = item[:-1]
+                    formatted_entry.append(item)
+            '''
+            # result = {'host':{'ip':formatted_entry[0]}}
             if list(result.values())[0]['flag'] == 'A':
+            # print(formatted_entry)
+            # if formatted_entry[2] == 'A':
                 fw.write(hostname.strip()+' '+list(result.values())[0]['ip']+' '+ list(result.values())[0]['flag']+'\n')
-            """ else
+                # fw.write(hostname.strip() + ' ' + formatted_entry[1] + ' ' +  formatted_entry[2])
+            else:
+
+                ctots.send(hostname.encode('utf-8'))
                 #[connect to TS server]
-                if flag-field (dr) == ‘NS’
-                    TSname= hostname-field(dr)
-                    ctots.send(hostname) #[Determine IP address of TSname, bind ctots socket to TS address, tsport]
-                    dr=ctots.recv(…..) #[Connect and send hostname string ]
-                    output (dr) """
+                #if flag-field (dr) == ‘NS’
+                #TSname= hostname-field(dr)
+                #ctots.send(hostname) #[Determine IP address of TSname, bind ctots socket to TS address, tsport]
+                #dr=ctots.recv(…..) #[Connect and send hostname string ]
+                #output (dr)
 
     # close everything
     fr.close()
