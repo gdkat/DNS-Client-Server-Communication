@@ -26,6 +26,7 @@ def rs():
     #List of information for TS Server in format [TS Host Name, TS_IP, Flag]
     TS = {}
     # {hostname: {ip: x , flag: y}}
+    name = ""
     for line in fr:
         #Per entry, use split to create list of words
         #format = {host : {'ip': ip, 'flag': flag}
@@ -73,7 +74,7 @@ def rs():
             if not TS:
                 entry=[hnstring,'Error: Host not found','NS']
             else:
-                entry=TS
+                entry={hnstring:TS[name]}
         #using pickle here to convert list into
         #pickle data and send data over socket, since can't just send a list
         crsd.send(pickle.dumps(entry))

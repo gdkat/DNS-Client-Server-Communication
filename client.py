@@ -40,19 +40,20 @@ def client():
         print('{} \n'.format("connect error "), err)
         exit()
 
-    try:
+    """ try:
         sa_sameas_myaddr = 'grep.cs.rutgers.edu'
         port = 5678
         server_binding = (sa_sameas_myaddr, port)
         ctots.connect(server_binding)
     except mysoc.error as err:
         print('{} \n'.format("connect error "), err)
-        exit()
+        exit() """
 
 
     #check rs-server.py for information on how data
     #is being transferred and stored
     #write all resolved IP information to RESOLVED.txt
+    first = True
     with open("RESOLVED.txt", "w") as fw:
         for hostname in fr:
             ctors.send(hostname.strip().encode('utf-8'))
@@ -62,6 +63,16 @@ def client():
             if list(result.values())[0]['flag'] == 'A':
                 fw.write(hostname.strip()+' '+list(result.values())[0]['ip']+' '+ list(result.values())[0]['flag']+'\n')
             else:
+                if first:
+                    first = False
+                    try:
+                        sa_sameas_myaddr = list(result.values())[0]['ip']
+                        port = 5678
+                        server_binding = (sa_sameas_myaddr, port)
+                        ctots.connect(server_binding)
+                    except mysoc.error as err:
+                        print('{} \n'.format("connect error "), err)
+                        exit()
                 ctots.send(hostname.strip().encode('utf-8'))
                 dataFromTS=ctots.recv(100)
                 if not dataFromTS: break
