@@ -36,11 +36,11 @@ def ts():
 
     #determine local hostname, IP
     #address , select a port number
-    server_binding=('',50008)
+    server_binding=('',5678)
     tssd.bind(server_binding)
     tssd.listen(1)
     # host=mysoc.gethostname()
-    host = '192.168.0.126'
+    host = 'grep.cs.rutgers.edu'
     print("[S]: Server host name is: ",host)
     localhost_ip=(mysoc.gethostbyname(host))
     print("[S]: Attempting to connect to client.\n[S]: Server IP address is  ",localhost_ip)
@@ -54,8 +54,7 @@ def ts():
             #entry = TS_table[hnstring]
             entry = hnstring + ' ' + TS_table[hnstring]['ip'] + ' ' + TS_table[hnstring]['flag']
         else:
-            entry = "hname " + "Error: Host not found"
-        print(entry)
+            entry = hnstring + " - Error:HOST NOT FOUND"
         ctsd.send(pickle.dumps(entry))
 
     # close everything
