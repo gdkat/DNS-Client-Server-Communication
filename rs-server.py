@@ -16,7 +16,7 @@ def rs():
         fr = open(fname, "r")
     except IOError as err:
         print('{} \n'.format("File Open Error ",err))
-        print("Please ensure desired file to reverse exists in source folder and is named HW1test.txt")
+        print("Please ensure desired file to reverse exists in source folder and is named PROJI-DNSRS.txt")
         exit()
 
     #using dictionary structure to store table information
@@ -32,7 +32,6 @@ def rs():
         tokenize = line.split()
         #Using strip a lot here
         #gets rid of trailing/preceding spaces and '\n' for proper strcomparisons
-        # print('???: ' + str(tokenize[1].strip()))
         if tokenize[1].strip() == '-':
             pass
         # RS_table[tokenize[0].strip()] = [tokenize[1].strip(),tokenize[2].strip()]

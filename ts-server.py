@@ -16,7 +16,7 @@ def ts():
         fr = open(fname, "r")
     except IOError as err:
         print('{} \n'.format("File Open Error ",err))
-        print("Please ensure desired file to reverse exists in source folder and is named HW1test.txt")
+        print("Please ensure desired file to reverse exists in source folder and is named PROJI-DNSTS.txt")
         exit()
 
     TS_table = {}
@@ -45,9 +45,10 @@ def ts():
     localhost_ip=(mysoc.gethostbyname(host))
     print("[S]: Attempting to connect to client.\n[S]: Server IP address is  ",localhost_ip)
     ctsd,addr=tssd.accept()
+    print ("[S]: Got a connection request from a client at", addr)
 
     while True:
-        hnstring=ctsd.recv(100)
+        hnstring=ctsd.recv(100).decode('utf-8')
         if not hnstring: break
         entry = ''
         if hnstring in TS_table:
